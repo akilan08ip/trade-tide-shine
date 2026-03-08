@@ -141,18 +141,18 @@ export default function Header({ onSearch }: HeaderProps) {
         <div className="flex items-center gap-3">
           {location.pathname === '/' && (
           <motion.div
-            className="relative w-64"
-            animate={{ width: searchFocused ? 300 : 256 }}
+            className="relative w-40"
+            animate={{ width: searchFocused ? 220 : 160 }}
             transition={{ type: 'spring', stiffness: 300, damping: 25 }}
           >
-            <Search className={`absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 transition-colors duration-200 ${searchFocused ? 'text-primary' : 'text-muted-foreground'}`} />
+            <Search className={`absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 transition-colors duration-200 ${searchFocused ? 'text-primary' : 'text-muted-foreground'}`} />
             <Input
-              placeholder="Search coins..."
+              placeholder="Search..."
               value={searchValue}
               onChange={(e) => handleSearch(e.target.value)}
               onFocus={() => setSearchFocused(true)}
               onBlur={() => setSearchFocused(false)}
-              className={`pl-9 h-9 bg-secondary/50 border-border/50 text-sm transition-all duration-300 ${searchFocused ? 'border-primary/50 shadow-[0_0_15px_hsl(142,71%,45%/0.1)]' : ''}`}
+              className={`pl-8 h-8 bg-secondary/50 border-border/50 text-xs transition-all duration-300 ${searchFocused ? 'border-primary/50 shadow-[0_0_15px_hsl(142,71%,45%/0.1)]' : ''}`}
             />
           </motion.div>
           )}
