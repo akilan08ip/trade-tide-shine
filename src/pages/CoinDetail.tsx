@@ -262,18 +262,41 @@ export default function CoinDetail() {
               { label: '7d', value: md.price_change_percentage_7d },
               { label: '30d', value: md.price_change_percentage_30d },
               { label: '1y', value: md.price_change_percentage_1y },
-            ].map(({ label, value }) => (
-              <motion.div
-                key={label}
-                whileHover={{ scale: 1.03 }}
-                className="rounded-lg bg-secondary/50 p-3"
-              >
-                <p className="text-xs text-muted-foreground">{label}</p>
-                <p className={`text-sm font-bold font-mono ${value >= 0 ? 'text-gain' : 'text-loss'}`}>
-                  {value >= 0 ? '▲' : '▼'} {formatPercent(value).replace('+', '').replace('-', '')}
-                </p>
-              </motion.div>
-            ))}
+            ].map(({ label, value }, i) => {
+              const positive = value >= 0;
+              return (
+                <motion.div
+                  key={label}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.35 + i * 0.05 }}
+                  whileHover={{ y: -4, scale: 1.05, transition: { duration: 0.2 } }}
+                  whileTap={{ scale: 0.96 }}
+                  className={`rounded-xl p-3.5 cursor-default relative overflow-hidden group border transition-all duration-300 ${
+                    positive
+                      ? 'bg-gain/5 border-gain/20 hover:border-gain/40 hover:shadow-[0_0_20px_-5px_hsl(var(--gain)/0.3)]'
+                      : 'bg-loss/5 border-loss/20 hover:border-loss/40 hover:shadow-[0_0_20px_-5px_hsl(var(--loss)/0.3)]'
+                  }`}
+                >
+                  <div className={`absolute inset-0 bg-gradient-to-br ${positive ? 'from-gain/10 to-transparent' : 'from-loss/10 to-transparent'} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                  <div className="relative">
+                    <p className="text-xs text-muted-foreground mb-1">{label}</p>
+                    <div className="flex items-center gap-1.5">
+                      <motion.span
+                        animate={{ y: [0, positive ? -2 : 2, 0] }}
+                        transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
+                        className={`text-sm ${positive ? 'text-gain' : 'text-loss'}`}
+                      >
+                        {positive ? '▲' : '▼'}
+                      </motion.span>
+                      <p className={`text-sm font-bold font-mono ${positive ? 'text-gain' : 'text-loss'}`}>
+                        {formatPercent(value).replace('+', '').replace('-', '')}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </motion.div>
 
