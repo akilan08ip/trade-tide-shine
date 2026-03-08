@@ -161,24 +161,34 @@ export default function CoinDetail() {
               </Button>
             ))}
           </div>
-          <ResponsiveContainer width="100%" height={350}>
-            <AreaChart data={chartFormatted}>
-              <defs>
-                <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor={isPositive ? 'hsl(142, 71%, 45%)' : 'hsl(0, 72%, 51%)'} stopOpacity={0.3} />
-                  <stop offset="95%" stopColor={isPositive ? 'hsl(142, 71%, 45%)' : 'hsl(0, 72%, 51%)'} stopOpacity={0} />
-                </linearGradient>
-              </defs>
-              <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{ fill: 'hsl(0, 0%, 50%)', fontSize: 11 }} />
-              <YAxis domain={['auto', 'auto']} axisLine={false} tickLine={false} tick={{ fill: 'hsl(0, 0%, 50%)', fontSize: 11 }} tickFormatter={(v) => formatPrice(v)} width={80} />
-              <Tooltip
-                contentStyle={{ background: 'hsl(0, 0%, 6%)', border: '1px solid hsl(0, 0%, 12%)', borderRadius: 8, fontSize: 12 }}
-                labelStyle={{ color: 'hsl(0, 0%, 50%)' }}
-                formatter={(value: number) => [formatPrice(value), 'Price (USD)']}
-              />
-              <Area type="monotone" dataKey="price" stroke={isPositive ? 'hsl(142, 71%, 45%)' : 'hsl(0, 72%, 51%)'} fill="url(#colorPrice)" strokeWidth={2} />
-            </AreaChart>
-          </ResponsiveContainer>
+          {chartFormatted.length > 0 ? (
+            <ResponsiveContainer width="100%" height={350}>
+              <AreaChart data={chartFormatted}>
+                <defs>
+                  <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor={isPositive ? 'hsl(142, 71%, 45%)' : 'hsl(0, 72%, 51%)'} stopOpacity={0.3} />
+                    <stop offset="95%" stopColor={isPositive ? 'hsl(142, 71%, 45%)' : 'hsl(0, 72%, 51%)'} stopOpacity={0} />
+                  </linearGradient>
+                </defs>
+                <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{ fill: 'hsl(0, 0%, 50%)', fontSize: 11 }} />
+                <YAxis domain={['auto', 'auto']} axisLine={false} tickLine={false} tick={{ fill: 'hsl(0, 0%, 50%)', fontSize: 11 }} tickFormatter={(v) => formatPrice(v)} width={80} />
+                <Tooltip
+                  contentStyle={{ background: 'hsl(0, 0%, 6%)', border: '1px solid hsl(0, 0%, 12%)', borderRadius: 8, fontSize: 12 }}
+                  labelStyle={{ color: 'hsl(0, 0%, 50%)' }}
+                  formatter={(value: number) => [formatPrice(value), 'Price (USD)']}
+                />
+                <Area type="monotone" dataKey="price" stroke={isPositive ? 'hsl(142, 71%, 45%)' : 'hsl(0, 72%, 51%)'} fill="url(#colorPrice)" strokeWidth={2} />
+              </AreaChart>
+            </ResponsiveContainer>
+          ) : (
+            <div className="flex items-center justify-center h-[350px] text-muted-foreground text-sm">
+              <div className="text-center space-y-2">
+                <div className="animate-pulse text-2xl">📊</div>
+                <p>Chart data loading...</p>
+                <p className="text-xs text-muted-foreground/60">Free API may be rate-limited. Try again shortly.</p>
+              </div>
+            </div>
+          )}
         </motion.div>
 
         {/* Stats grid - showing both currencies */}
