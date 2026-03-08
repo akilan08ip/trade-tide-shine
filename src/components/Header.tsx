@@ -30,7 +30,7 @@ export default function Header({ onSearch }: HeaderProps) {
     <header className="sticky top-0 z-50 border-b border-border/30 bg-background/60 backdrop-blur-2xl">
       {/* Ticker bar */}
       {globalData && (
-        <div className="border-b border-border/30 bg-secondary/30 px-4 py-1.5 text-xs font-mono">
+        <div className="border-b border-border/20 bg-secondary/20 px-4 py-1.5 text-xs font-mono">
           <div className="flex items-center gap-6 overflow-hidden">
             <span className="text-muted-foreground">Market Cap: <span className="text-foreground">{formatMarketCap(globalData.data.total_market_cap.usd)}</span></span>
             <span className="text-muted-foreground">24h Vol: <span className="text-foreground">{formatMarketCap(globalData.data.total_volume.usd)}</span></span>
