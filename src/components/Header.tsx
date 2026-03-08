@@ -155,7 +155,11 @@ export default function Header({ onSearch }: HeaderProps) {
               className={`pl-9 h-9 bg-secondary/50 border-border/50 text-sm transition-all duration-300 ${searchFocused ? 'border-primary/50 shadow-[0_0_15px_hsl(142,71%,45%/0.1)]' : ''}`}
             />
           </motion.div>
-        )}
+          )}
+          <div className="hidden md:block">
+            <LiveClock />
+          </div>
+        </div>
       </div>
 
       {/* Mobile nav */}
