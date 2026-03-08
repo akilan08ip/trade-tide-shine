@@ -4,7 +4,7 @@ import Header from '@/components/Header';
 import { formatPrice, formatINR, formatMarketCap, formatMarketCapINR, formatPercent } from '@/lib/api';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, DollarSign, IndianRupee, Activity, TrendingUp, TrendingDown, BarChart3, Layers, Infinity, Trophy, Target } from 'lucide-react';
+import { ArrowLeft, DollarSign, IndianRupee, Activity, TrendingUp, TrendingDown, BarChart3, Layers, Infinity as InfinityIcon, Trophy, Target } from 'lucide-react';
 import { useState, useMemo } from 'react';
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { motion } from 'framer-motion';
