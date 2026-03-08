@@ -83,14 +83,18 @@ export default function Header({ onSearch }: HeaderProps) {
             <span className="text-muted-foreground hidden md:inline">
               Coins: <span className="text-foreground">{globalData.data.active_cryptocurrencies.toLocaleString()}</span>
             </span>
-            <motion.span
-              className="flex items-center gap-1.5 text-gain ml-auto"
-              animate={{ opacity: [1, 0.4, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              <span className="h-2 w-2 rounded-full bg-gain shadow-[0_0_8px_hsl(142,71%,45%)]" />
-              <span className="font-semibold tracking-wider text-[10px]">LIVE</span>
-            </motion.span>
+            <div className="ml-auto flex items-center gap-3">
+              <LiveClock />
+              <div className="h-3 w-px bg-border/50" />
+              <motion.span
+                className="flex items-center gap-1.5 text-gain"
+                animate={{ opacity: [1, 0.4, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <span className="h-2 w-2 rounded-full bg-gain shadow-[0_0_8px_hsl(142,71%,45%)]" />
+                <span className="font-semibold tracking-wider text-[10px]">LIVE</span>
+              </motion.span>
+            </div>
           </motion.div>
         </div>
       )}
@@ -156,9 +160,6 @@ export default function Header({ onSearch }: HeaderProps) {
             />
           </motion.div>
           )}
-          <div className="hidden md:block">
-            <LiveClock />
-          </div>
         </div>
       </div>
 
