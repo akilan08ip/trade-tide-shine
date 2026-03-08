@@ -27,10 +27,10 @@ export default function Header({ onSearch }: HeaderProps) {
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-border/30 bg-background/60 backdrop-blur-2xl">
       {/* Ticker bar */}
       {globalData && (
-        <div className="border-b border-border/30 bg-secondary/30 px-4 py-1.5 text-xs font-mono">
+        <div className="border-b border-border/20 bg-secondary/20 px-4 py-1.5 text-xs font-mono">
           <div className="flex items-center gap-6 overflow-hidden">
             <span className="text-muted-foreground">Market Cap: <span className="text-foreground">{formatMarketCap(globalData.data.total_market_cap.usd)}</span></span>
             <span className="text-muted-foreground">24h Vol: <span className="text-foreground">{formatMarketCap(globalData.data.total_volume.usd)}</span></span>
@@ -52,11 +52,11 @@ export default function Header({ onSearch }: HeaderProps) {
 
       <div className="flex items-center justify-between px-4 py-3 md:px-6">
         <div className="flex items-center gap-8">
-          <Link to="/" className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
+          <Link to="/" className="flex items-center gap-2 group">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary glow-green transition-all duration-300 group-hover:scale-110">
               <TrendingUp className="h-4 w-4 text-primary-foreground" />
             </div>
-            <span className="text-lg font-bold tracking-tight">CryptoTerminal</span>
+            <span className="text-lg font-bold tracking-tight font-display gradient-text">CryptoTerminal</span>
           </Link>
 
           <nav className="hidden items-center gap-1 md:flex">
