@@ -160,9 +160,6 @@ export default function Header({ onSearch }: HeaderProps) {
             />
           </motion.div>
           )}
-          <div className="hidden md:block">
-            <LiveClock />
-          </div>
         </div>
       </div>
 
