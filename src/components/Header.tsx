@@ -5,6 +5,7 @@ import { useGlobalData } from '@/hooks/useCryptoData';
 import { formatMarketCap } from '@/lib/api';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import LiveClock from './LiveClock';
 
 const navItems = [
   { to: '/', label: 'Markets', icon: TrendingUp },
@@ -137,7 +138,8 @@ export default function Header({ onSearch }: HeaderProps) {
           </nav>
         </div>
 
-        {location.pathname === '/' && (
+        <div className="flex items-center gap-3">
+          {location.pathname === '/' && (
           <motion.div
             className="relative w-64"
             animate={{ width: searchFocused ? 300 : 256 }}
@@ -153,7 +155,11 @@ export default function Header({ onSearch }: HeaderProps) {
               className={`pl-9 h-9 bg-secondary/50 border-border/50 text-sm transition-all duration-300 ${searchFocused ? 'border-primary/50 shadow-[0_0_15px_hsl(142,71%,45%/0.1)]' : ''}`}
             />
           </motion.div>
-        )}
+          )}
+          <div className="hidden md:block">
+            <LiveClock />
+          </div>
+        </div>
       </div>
 
       {/* Mobile nav */}
