@@ -138,7 +138,8 @@ export default function Header({ onSearch }: HeaderProps) {
           </nav>
         </div>
 
-        {location.pathname === '/' && (
+        <div className="flex items-center gap-3">
+          {location.pathname === '/' && (
           <motion.div
             className="relative w-64"
             animate={{ width: searchFocused ? 300 : 256 }}
