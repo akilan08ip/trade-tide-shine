@@ -5,6 +5,7 @@ import { useGlobalData } from '@/hooks/useCryptoData';
 import { formatMarketCap } from '@/lib/api';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import LiveClock from './LiveClock';
 
 const navItems = [
   { to: '/', label: 'Markets', icon: TrendingUp },
