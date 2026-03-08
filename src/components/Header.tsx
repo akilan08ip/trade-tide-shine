@@ -27,7 +27,7 @@ export default function Header({ onSearch }: HeaderProps) {
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-border/30 bg-background/60 backdrop-blur-2xl">
       {/* Ticker bar */}
       {globalData && (
         <div className="border-b border-border/30 bg-secondary/30 px-4 py-1.5 text-xs font-mono">
