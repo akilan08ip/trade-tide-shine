@@ -199,32 +199,51 @@ export default function CoinDetail() {
           className="grid grid-cols-2 gap-3 md:grid-cols-4"
         >
           {[
-            { label: 'Market Cap', value: fmtCap(md.market_cap.usd, md.market_cap.inr) },
-            { label: '24h Volume', value: fmtCap(md.total_volume.usd, md.total_volume.inr) },
-            { label: '24h High', value: fmt(md.high_24h.usd, md.high_24h.inr) },
-            { label: '24h Low', value: fmt(md.low_24h.usd, md.low_24h.inr) },
-            { label: 'Circulating Supply', value: md.circulating_supply.toLocaleString() },
-            { label: 'Max Supply', value: md.max_supply ? md.max_supply.toLocaleString() : '∞' },
-            { label: 'All-Time High', value: fmt(md.ath.usd, md.ath.inr) },
-            { label: 'All-Time Low', value: fmt(md.atl.usd, md.atl.inr) },
-          ].map(({ label, value }, i) => (
+            { label: 'Market Cap', value: fmtCap(md.market_cap.usd, md.market_cap.inr), icon: BarChart3, gradient: 'from-primary/20 via-primary/5 to-transparent', iconColor: 'text-primary' },
+            { label: '24h Volume', value: fmtCap(md.total_volume.usd, md.total_volume.inr), icon: Activity, gradient: 'from-[hsl(217,91%,60%)]/20 via-[hsl(217,91%,60%)]/5 to-transparent', iconColor: 'text-[hsl(217,91%,60%)]' },
+            { label: '24h High', value: fmt(md.high_24h.usd, md.high_24h.inr), icon: TrendingUp, gradient: 'from-primary/20 via-primary/5 to-transparent', iconColor: 'text-primary' },
+            { label: '24h Low', value: fmt(md.low_24h.usd, md.low_24h.inr), icon: TrendingDown, gradient: 'from-destructive/20 via-destructive/5 to-transparent', iconColor: 'text-destructive' },
+            { label: 'Circulating Supply', value: md.circulating_supply.toLocaleString(), icon: Layers, gradient: 'from-[hsl(280,65%,60%)]/20 via-[hsl(280,65%,60%)]/5 to-transparent', iconColor: 'text-[hsl(280,65%,60%)]' },
+            { label: 'Max Supply', value: md.max_supply ? md.max_supply.toLocaleString() : '∞', icon: Infinity, gradient: 'from-[hsl(190,80%,50%)]/20 via-[hsl(190,80%,50%)]/5 to-transparent', iconColor: 'text-[hsl(190,80%,50%)]' },
+            { label: 'All-Time High', value: fmt(md.ath.usd, md.ath.inr), icon: Trophy, gradient: 'from-warning/20 via-warning/5 to-transparent', iconColor: 'text-warning' },
+            { label: 'All-Time Low', value: fmt(md.atl.usd, md.atl.inr), icon: Target, gradient: 'from-destructive/20 via-destructive/5 to-transparent', iconColor: 'text-destructive' },
+          ].map(({ label, value, icon: Icon, gradient, iconColor }, i) => (
             <motion.div
               key={label}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2 + i * 0.03 }}
-              whileHover={{ y: -3, scale: 1.02 }}
-              className="glass-card rounded-xl p-3.5 border-glow"
+              initial={{ opacity: 0, scale: 0.9, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ delay: 0.2 + i * 0.05, type: 'spring', stiffness: 200 }}
+              whileHover={{ y: -6, scale: 1.04, transition: { duration: 0.25 } }}
+              whileTap={{ scale: 0.97 }}
+              className="glass-card rounded-xl p-4 border-glow cursor-default group relative overflow-hidden"
             >
-              <p className="text-xs text-muted-foreground mb-1">{label}</p>
-              <motion.p
-                key={`${currency}-${label}`}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="text-sm font-bold font-mono"
-              >
-                {value}
-              </motion.p>
+              {/* Hover gradient overlay */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-100 transition-all duration-500`} />
+              
+              {/* Floating icon background */}
+              <div className="absolute -right-2 -top-2 opacity-[0.04] group-hover:opacity-[0.1] transition-opacity duration-500">
+                <Icon className="h-16 w-16" />
+              </div>
+
+              <div className="relative">
+                <div className="flex items-center gap-1.5 mb-2">
+                  <motion.div
+                    whileHover={{ rotate: 15, scale: 1.3 }}
+                    transition={{ type: 'spring', stiffness: 300 }}
+                  >
+                    <Icon className={`h-3.5 w-3.5 ${iconColor} opacity-60 group-hover:opacity-100 transition-opacity duration-300`} />
+                  </motion.div>
+                  <p className="text-xs text-muted-foreground font-medium">{label}</p>
+                </div>
+                <motion.p
+                  key={`${currency}-${label}`}
+                  initial={{ opacity: 0, x: -8 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  className="text-sm font-bold font-mono tracking-tight"
+                >
+                  {value}
+                </motion.p>
+              </div>
             </motion.div>
           ))}
         </motion.div>
