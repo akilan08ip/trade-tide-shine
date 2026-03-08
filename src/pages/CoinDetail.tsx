@@ -204,7 +204,7 @@ export default function CoinDetail() {
             { label: '24h High', value: fmt(md.high_24h.usd, md.high_24h.inr), icon: TrendingUp, gradient: 'from-primary/20 via-primary/5 to-transparent', iconColor: 'text-primary' },
             { label: '24h Low', value: fmt(md.low_24h.usd, md.low_24h.inr), icon: TrendingDown, gradient: 'from-destructive/20 via-destructive/5 to-transparent', iconColor: 'text-destructive' },
             { label: 'Circulating Supply', value: md.circulating_supply.toLocaleString(), icon: Layers, gradient: 'from-[hsl(280,65%,60%)]/20 via-[hsl(280,65%,60%)]/5 to-transparent', iconColor: 'text-[hsl(280,65%,60%)]' },
-            { label: 'Max Supply', value: md.max_supply ? md.max_supply.toLocaleString() : '∞', icon: Infinity, gradient: 'from-[hsl(190,80%,50%)]/20 via-[hsl(190,80%,50%)]/5 to-transparent', iconColor: 'text-[hsl(190,80%,50%)]' },
+            { label: 'Max Supply', value: md.max_supply ? md.max_supply.toLocaleString() : '∞', icon: InfinityIcon, gradient: 'from-[hsl(190,80%,50%)]/20 via-[hsl(190,80%,50%)]/5 to-transparent', iconColor: 'text-[hsl(190,80%,50%)]' },
             { label: 'All-Time High', value: fmt(md.ath.usd, md.ath.inr), icon: Trophy, gradient: 'from-warning/20 via-warning/5 to-transparent', iconColor: 'text-warning' },
             { label: 'All-Time Low', value: fmt(md.atl.usd, md.atl.inr), icon: Target, gradient: 'from-destructive/20 via-destructive/5 to-transparent', iconColor: 'text-destructive' },
           ].map(({ label, value, icon: Icon, gradient, iconColor }, i) => (
