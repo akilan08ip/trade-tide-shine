@@ -17,6 +17,10 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      {/* Floating orbs for ambient background */}
+      <div className="orb orb-1" aria-hidden="true" />
+      <div className="orb orb-2" aria-hidden="true" />
+      <div className="orb orb-3" aria-hidden="true" />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
