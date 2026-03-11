@@ -102,8 +102,9 @@ export default function Portfolio() {
                 <Input type="number" placeholder="Buy price (USD)" value={buyPrice} onChange={e => setBuyPrice(e.target.value)} className="bg-secondary/50" />
                 <Button onClick={handleAdd} className="w-full" disabled={!selectedCoin || !amount || !buyPrice}>Add</Button>
               </div>
-            </DialogContent>
-          </Dialog>
+             </DialogContent>
+            </Dialog>
+          </div>
         </div>
 
         {/* Total overview */}
