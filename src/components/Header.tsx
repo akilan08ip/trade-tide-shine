@@ -1,10 +1,8 @@
 import { Link, useLocation } from 'react-router-dom';
-import { TrendingUp, BarChart3, Briefcase, Newspaper, Search, Zap, FileDown } from 'lucide-react';
+import { TrendingUp, BarChart3, Briefcase, Newspaper, Search, Zap } from 'lucide-react';
 import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 import { useGlobalData } from '@/hooks/useCryptoData';
 import { formatMarketCap } from '@/lib/api';
-import { generateProjectPDF } from '@/lib/generateProjectPDF';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import LiveClock from './LiveClock';
@@ -145,15 +143,6 @@ export default function Header({ onSearch }: HeaderProps) {
         </div>
 
         <div className="flex items-center gap-3">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={generateProjectPDF}
-            className="hidden md:flex items-center gap-1.5 h-8 text-xs border-border/50 bg-secondary/50 hover:bg-secondary"
-          >
-            <FileDown className="h-3.5 w-3.5" />
-            PDF Report
-          </Button>
           {location.pathname === '/' && (
           <motion.div
             className="relative w-40"
