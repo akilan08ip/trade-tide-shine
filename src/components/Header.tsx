@@ -1,8 +1,10 @@
 import { Link, useLocation } from 'react-router-dom';
-import { TrendingUp, BarChart3, Briefcase, Newspaper, Search, Zap } from 'lucide-react';
+import { TrendingUp, BarChart3, Briefcase, Newspaper, Search, Zap, FileDown } from 'lucide-react';
 import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import { useGlobalData } from '@/hooks/useCryptoData';
 import { formatMarketCap } from '@/lib/api';
+import { generateProjectPDF } from '@/lib/generateProjectPDF';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import LiveClock from './LiveClock';
