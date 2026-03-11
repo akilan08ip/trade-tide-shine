@@ -3,10 +3,11 @@ import Header from '@/components/Header';
 import { usePortfolio } from '@/hooks/usePortfolio';
 import { useCoins } from '@/hooks/useCryptoData';
 import { formatPrice, formatPercent } from '@/lib/api';
+import { generatePortfolioPDF } from '@/lib/generatePortfolioPDF';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Plus, Trash2, Wallet } from 'lucide-react';
+import { Plus, Trash2, Wallet, FileDown } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function Portfolio() {
