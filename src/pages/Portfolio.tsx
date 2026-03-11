@@ -3,10 +3,11 @@ import Header from '@/components/Header';
 import { usePortfolio } from '@/hooks/usePortfolio';
 import { useCoins } from '@/hooks/useCryptoData';
 import { formatPrice, formatPercent } from '@/lib/api';
+import { generatePortfolioPDF } from '@/lib/generatePortfolioPDF';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Plus, Trash2, Wallet } from 'lucide-react';
+import { Plus, Trash2, Wallet, FileDown } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function Portfolio() {
@@ -57,10 +58,28 @@ export default function Portfolio() {
       <main className="mx-auto max-w-5xl px-4 py-6 space-y-6 md:px-6">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold">Portfolio Tracker</h1>
-          <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger asChild>
-              <Button size="sm"><Plus className="h-4 w-4 mr-1" /> Add Coin</Button>
-            </DialogTrigger>
+          <div className="flex items-center gap-2">
+            {portfolio.length > 0 && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => generatePortfolioPDF({
+                  totalValue, totalCost, totalPnl, totalPnlPercent,
+                  holdings: portfolioWithPrices.map(p => ({
+                    name: p.name, symbol: p.symbol, amount: p.amount,
+                    buyPrice: p.buyPrice, currentPrice: p.currentPrice,
+                    totalValue: p.totalValue, totalCost: p.totalCost,
+                    pnl: p.pnl, pnlPercent: p.pnlPercent,
+                  })),
+                })}
+              >
+                <FileDown className="h-4 w-4 mr-1" /> Download PDF
+              </Button>
+            )}
+            <Dialog open={open} onOpenChange={setOpen}>
+              <DialogTrigger asChild>
+                <Button size="sm"><Plus className="h-4 w-4 mr-1" /> Add Coin</Button>
+              </DialogTrigger>
             <DialogContent className="bg-card border-border">
               <DialogHeader><DialogTitle>Add to Portfolio</DialogTitle></DialogHeader>
               <div className="space-y-4">
@@ -83,8 +102,9 @@ export default function Portfolio() {
                 <Input type="number" placeholder="Buy price (USD)" value={buyPrice} onChange={e => setBuyPrice(e.target.value)} className="bg-secondary/50" />
                 <Button onClick={handleAdd} className="w-full" disabled={!selectedCoin || !amount || !buyPrice}>Add</Button>
               </div>
-            </DialogContent>
-          </Dialog>
+             </DialogContent>
+            </Dialog>
+          </div>
         </div>
 
         {/* Total overview */}
