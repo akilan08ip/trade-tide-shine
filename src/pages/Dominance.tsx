@@ -54,19 +54,24 @@ export default function Dominance() {
                 outerRadius={180}
                 paddingAngle={2}
                 dataKey="value"
-                label={({ name, value }) => `${name} ${value}%`}
+                label={({ name, value, x, y }) => (
+                  <text x={x} y={y} fill="hsl(210, 20%, 92%)" fontSize={12} textAnchor="middle" dominantBaseline="central">
+                    {`${name} ${value}%`}
+                  </text>
+                )}
                 labelLine={{ stroke: 'hsl(215, 15%, 55%)' }}
               >
                 {chartData.map((_, i) => (
-                  <Cell key={i} fill={COLORS[i % COLORS.length]} />
+                  <Cell key={i} fill={COLORS[i % COLORS.length]} stroke="none" />
                 ))}
               </Pie>
               <Tooltip
-                contentStyle={{ background: 'hsl(220, 18%, 10%)', border: '1px solid hsl(220, 14%, 18%)', borderRadius: 8 }}
+                contentStyle={{ background: 'hsl(220, 18%, 10%)', border: '1px solid hsl(220, 14%, 18%)', borderRadius: 8, color: 'hsl(210, 20%, 92%)' }}
+                itemStyle={{ color: 'hsl(210, 20%, 92%)' }}
                 formatter={(value: number) => [`${value}%`, 'Dominance']}
               />
               <Legend
-                wrapperStyle={{ fontSize: 12 }}
+                wrapperStyle={{ fontSize: 12, color: 'hsl(210, 20%, 92%)' }}
                 formatter={(value) => <span style={{ color: 'hsl(210, 20%, 92%)' }}>{value}</span>}
               />
             </PieChart>
