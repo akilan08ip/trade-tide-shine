@@ -1,7 +1,7 @@
 import Header from '@/components/Header';
 import { useGlobalData } from '@/hooks/useCryptoData';
 import { Skeleton } from '@/components/ui/skeleton';
-import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
+import { BarChart, Bar, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis, CartesianGrid } from 'recharts';
 
 const COLORS = [
   'hsl(38, 92%, 50%)',   // BTC - gold
@@ -45,36 +45,21 @@ export default function Dominance() {
 
         <div className="glass-card rounded-lg p-6">
           <ResponsiveContainer width="100%" height={450}>
-            <PieChart>
-              <Pie
-                data={chartData}
-                cx="50%"
-                cy="50%"
-                innerRadius={100}
-                outerRadius={180}
-                paddingAngle={2}
-                dataKey="value"
-                label={({ name, value, x, y }) => (
-                  <text x={x} y={y} fill="hsl(210, 20%, 92%)" fontSize={12} textAnchor="middle" dominantBaseline="central">
-                    {`${name} ${value}%`}
-                  </text>
-                )}
-                labelLine={{ stroke: 'hsl(215, 15%, 55%)' }}
-              >
-                {chartData.map((_, i) => (
-                  <Cell key={i} fill={COLORS[i % COLORS.length]} stroke="none" />
-                ))}
-              </Pie>
+            <BarChart data={chartData} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="hsl(220, 14%, 18%)" />
+              <XAxis dataKey="name" tick={{ fill: 'hsl(210, 20%, 92%)', fontSize: 12 }} axisLine={{ stroke: 'hsl(220, 14%, 18%)' }} />
+              <YAxis tick={{ fill: 'hsl(210, 20%, 92%)', fontSize: 12 }} axisLine={{ stroke: 'hsl(220, 14%, 18%)' }} unit="%" />
               <Tooltip
                 contentStyle={{ background: 'hsl(220, 18%, 10%)', border: '1px solid hsl(220, 14%, 18%)', borderRadius: 8, color: 'hsl(210, 20%, 92%)' }}
                 itemStyle={{ color: 'hsl(210, 20%, 92%)' }}
                 formatter={(value: number) => [`${value}%`, 'Dominance']}
               />
-              <Legend
-                wrapperStyle={{ fontSize: 12, color: 'hsl(210, 20%, 92%)' }}
-                formatter={(value) => <span style={{ color: 'hsl(210, 20%, 92%)' }}>{value}</span>}
-              />
-            </PieChart>
+              <Bar dataKey="value" radius={[6, 6, 0, 0]} label={{ position: 'top', fill: 'hsl(210, 20%, 92%)', fontSize: 11, formatter: (v: number) => `${v}%` }}>
+                {chartData.map((_, i) => (
+                  <Cell key={i} fill={COLORS[i % COLORS.length]} />
+                ))}
+              </Bar>
+            </BarChart>
           </ResponsiveContainer>
         </div>
 
