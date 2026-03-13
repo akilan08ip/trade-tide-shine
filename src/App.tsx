@@ -29,6 +29,7 @@ const App = () => (
           <Route path="/dominance" element={<Dominance />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/news" element={<News />} />
+          <Route path="/auth" element={<Auth />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
