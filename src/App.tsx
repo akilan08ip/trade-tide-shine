@@ -8,6 +8,7 @@ import CoinDetail from "./pages/CoinDetail";
 import Dominance from "./pages/Dominance";
 import Portfolio from "./pages/Portfolio";
 import News from "./pages/News";
+import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
