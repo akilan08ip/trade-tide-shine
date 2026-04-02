@@ -162,7 +162,8 @@ export default function Header({ onSearch }: HeaderProps) {
           </nav>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
           {location.pathname === '/' && (
           <motion.div
             className="relative w-40"
