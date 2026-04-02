@@ -7,6 +7,7 @@ import { formatMarketCap } from '@/lib/api';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import LiveClock from './LiveClock';
+import ThemeToggle from './ThemeToggle';
 import { supabase } from '@/integrations/supabase/client';
 
 const navItems = [
