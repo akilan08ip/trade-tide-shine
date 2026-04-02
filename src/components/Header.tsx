@@ -7,6 +7,7 @@ import { formatMarketCap } from '@/lib/api';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import LiveClock from './LiveClock';
+import ThemeToggle from './ThemeToggle';
 import { supabase } from '@/integrations/supabase/client';
 
 const navItems = [
@@ -161,7 +162,8 @@ export default function Header({ onSearch }: HeaderProps) {
           </nav>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
           {location.pathname === '/' && (
           <motion.div
             className="relative w-40"
