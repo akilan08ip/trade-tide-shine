@@ -22,13 +22,30 @@ interface HeaderProps {
 
 export default function Header({ onSearch }: HeaderProps) {
   const location = useLocation();
+  const navigate = useNavigate();
   const { data: globalData } = useGlobalData();
   const [searchValue, setSearchValue] = useState('');
   const [searchFocused, setSearchFocused] = useState(false);
+  const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+    return () => subscription.unsubscribe();
+  }, []);
 
   const handleSearch = (value: string) => {
     setSearchValue(value);
     onSearch?.(value);
+  };
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    navigate('/');
   };
 
   return (
