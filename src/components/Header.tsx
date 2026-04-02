@@ -1,11 +1,13 @@
-import { Link, useLocation } from 'react-router-dom';
-import { TrendingUp, BarChart3, Briefcase, Newspaper, Search, Zap } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { TrendingUp, BarChart3, Briefcase, Newspaper, Search, Zap, LogIn, LogOut, User } from 'lucide-react';
 import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import { useGlobalData } from '@/hooks/useCryptoData';
 import { formatMarketCap } from '@/lib/api';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import LiveClock from './LiveClock';
+import { supabase } from '@/integrations/supabase/client';
 
 const navItems = [
   { to: '/', label: 'Markets', icon: TrendingUp },
@@ -20,13 +22,30 @@ interface HeaderProps {
 
 export default function Header({ onSearch }: HeaderProps) {
   const location = useLocation();
+  const navigate = useNavigate();
   const { data: globalData } = useGlobalData();
   const [searchValue, setSearchValue] = useState('');
   const [searchFocused, setSearchFocused] = useState(false);
+  const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+    return () => subscription.unsubscribe();
+  }, []);
 
   const handleSearch = (value: string) => {
     setSearchValue(value);
     onSearch?.(value);
+  };
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    navigate('/');
   };
 
   return (
@@ -159,6 +178,41 @@ export default function Header({ onSearch }: HeaderProps) {
               className={`pl-8 h-8 bg-secondary/50 border-border/50 text-xs transition-all duration-300 ${searchFocused ? 'border-primary/50 shadow-[0_0_15px_hsl(142,71%,45%/0.1)]' : ''}`}
             />
           </motion.div>
+          )}
+
+          {user ? (
+            <div className="flex items-center gap-2">
+              <motion.div
+                className="flex items-center gap-2 rounded-lg bg-secondary/60 px-3 py-1.5 text-xs font-mono"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+              >
+                <User className="h-3.5 w-3.5 text-primary" />
+                <span className="text-foreground max-w-[100px] truncate">
+                  {user.user_metadata?.full_name || user.email?.split('@')[0]}
+                </span>
+              </motion.div>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handleSignOut}
+                className="h-8 gap-1.5 text-xs text-muted-foreground hover:text-foreground"
+              >
+                <LogOut className="h-3.5 w-3.5" />
+                <span className="hidden sm:inline">Logout</span>
+              </Button>
+            </div>
+          ) : (
+            <Link to="/auth">
+              <Button
+                variant="outline"
+                size="sm"
+                className="h-8 gap-1.5 text-xs border-primary/30 hover:border-primary/60 hover:bg-primary/10"
+              >
+                <LogIn className="h-3.5 w-3.5" />
+                <span>Login</span>
+              </Button>
+            </Link>
           )}
         </div>
       </div>
