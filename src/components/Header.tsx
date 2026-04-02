@@ -179,6 +179,41 @@ export default function Header({ onSearch }: HeaderProps) {
             />
           </motion.div>
           )}
+
+          {user ? (
+            <div className="flex items-center gap-2">
+              <motion.div
+                className="flex items-center gap-2 rounded-lg bg-secondary/60 px-3 py-1.5 text-xs font-mono"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+              >
+                <User className="h-3.5 w-3.5 text-primary" />
+                <span className="text-foreground max-w-[100px] truncate">
+                  {user.user_metadata?.full_name || user.email?.split('@')[0]}
+                </span>
+              </motion.div>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handleSignOut}
+                className="h-8 gap-1.5 text-xs text-muted-foreground hover:text-foreground"
+              >
+                <LogOut className="h-3.5 w-3.5" />
+                <span className="hidden sm:inline">Logout</span>
+              </Button>
+            </div>
+          ) : (
+            <Link to="/auth">
+              <Button
+                variant="outline"
+                size="sm"
+                className="h-8 gap-1.5 text-xs border-primary/30 hover:border-primary/60 hover:bg-primary/10"
+              >
+                <LogIn className="h-3.5 w-3.5" />
+                <span>Login</span>
+              </Button>
+            </Link>
+          )}
         </div>
       </div>
 
