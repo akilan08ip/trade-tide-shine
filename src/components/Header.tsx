@@ -1,11 +1,13 @@
-import { Link, useLocation } from 'react-router-dom';
-import { TrendingUp, BarChart3, Briefcase, Newspaper, Search, Zap } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { TrendingUp, BarChart3, Briefcase, Newspaper, Search, Zap, LogIn, LogOut, User } from 'lucide-react';
 import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import { useGlobalData } from '@/hooks/useCryptoData';
 import { formatMarketCap } from '@/lib/api';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import LiveClock from './LiveClock';
+import { supabase } from '@/integrations/supabase/client';
 
 const navItems = [
   { to: '/', label: 'Markets', icon: TrendingUp },
