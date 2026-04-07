@@ -9,6 +9,7 @@ import Dominance from "./pages/Dominance";
 import Portfolio from "./pages/Portfolio";
 import News from "./pages/News";
 import Auth from "./pages/Auth";
+import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/news" element={<News />} />
           <Route path="/auth" element={<Auth />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
