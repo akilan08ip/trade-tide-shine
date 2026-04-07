@@ -184,16 +184,19 @@ export default function Header({ onSearch }: HeaderProps) {
 
           {user ? (
             <div className="flex items-center gap-2">
-              <motion.div
-                className="flex items-center gap-2 rounded-lg bg-secondary/60 px-3 py-1.5 text-xs font-mono"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-              >
-                <User className="h-3.5 w-3.5 text-primary" />
-                <span className="text-foreground max-w-[100px] truncate">
-                  {user.user_metadata?.full_name || user.email?.split('@')[0]}
-                </span>
-              </motion.div>
+              <Link to="/profile">
+                <motion.div
+                  className="flex items-center gap-2 rounded-lg bg-secondary/60 px-3 py-1.5 text-xs font-mono cursor-pointer hover:bg-secondary/80 transition-colors"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  whileHover={{ scale: 1.03 }}
+                >
+                  <User className="h-3.5 w-3.5 text-primary" />
+                  <span className="text-foreground max-w-[100px] truncate">
+                    {user.user_metadata?.full_name || user.email?.split('@')[0]}
+                  </span>
+                </motion.div>
+              </Link>
               <Button
                 variant="ghost"
                 size="sm"
