@@ -9,6 +9,7 @@ import Dominance from "./pages/Dominance";
 import Portfolio from "./pages/Portfolio";
 import News from "./pages/News";
 import Auth from "./pages/Auth";
+import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
