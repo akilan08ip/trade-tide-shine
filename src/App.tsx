@@ -10,6 +10,8 @@ import Portfolio from "./pages/Portfolio";
 import News from "./pages/News";
 import Auth from "./pages/Auth";
 import Profile from "./pages/Profile";
+import ResetPassword from "./pages/ResetPassword";
+import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();

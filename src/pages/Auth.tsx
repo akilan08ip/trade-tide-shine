@@ -203,7 +203,30 @@ const Auth = () => {
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
               </div>
-            </div>
+              {isLogin && (
+                <button
+                  type="button"
+                  onClick={async () => {
+                    if (!email.trim()) {
+                      toast({ title: 'Enter Email', description: 'Enter your email address first.', variant: 'destructive' });
+                      return;
+                    }
+                    setLoading(true);
+                    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+                      redirectTo: `${window.location.origin}/reset-password`,
+                    });
+                    setLoading(false);
+                    if (error) {
+                      toast({ title: 'Error', description: error.message, variant: 'destructive' });
+                    } else {
+                      toast({ title: 'Recovery Initiated', description: 'Check your email for the reset link.' });
+                    }
+                  }}
+                  className="font-mono text-[11px] text-primary/70 hover:text-primary underline underline-offset-4 transition-colors mt-1"
+                >
+                  forgot access key?
+                </button>
+              )
 
             <Button
               type="submit"
