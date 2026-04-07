@@ -10,6 +10,8 @@ import Portfolio from "./pages/Portfolio";
 import News from "./pages/News";
 import Auth from "./pages/Auth";
 import Profile from "./pages/Profile";
+import ResetPassword from "./pages/ResetPassword";
+import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,10 +30,11 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/coin/:id" element={<CoinDetail />} />
           <Route path="/dominance" element={<Dominance />} />
-          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/portfolio" element={<ProtectedRoute><Portfolio /></ProtectedRoute>} />
           <Route path="/news" element={<News />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
