@@ -226,7 +226,8 @@ const Auth = () => {
                 >
                   forgot access key?
                 </button>
-              )
+              )}
+            </div>
 
             <Button
               type="submit"
